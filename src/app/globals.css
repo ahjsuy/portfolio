@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #131515;
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-night-50: rgb(32, 32, 29);
+  --color-jet-50: rgb(29, 32, 32);
+  --color-teal-50: rgb(51, 153, 137);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-roboto: var(--font-rob);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.animated-slide {
+  transform: translateX(-250%);
+  animation: slide-in 0.75s ease-in 1 forwards;
+}
+
+.animated-slide-delay-1 {
+  transform: translateX(-150%);
+  animation: slide-in 0.75s 0.75s ease-in 1 forwards;
+}
+
+.animated-slide-delay-2 {
+  transform: translateX(-150%);
+  animation: slide-in 0.755s 1.25s ease-in 1 forwards;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.animated-color {
+  animation: color-change 10s infinite;
+}
+
+@keyframes color-change {
+  0% {
+    color: #eeaeca;
+  }
+  50% {
+    color: #94bbe9;
+  }
+  100% {
+    color: #eeaeca;
+  }
 }

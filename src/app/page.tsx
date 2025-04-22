@@ -1,103 +1,142 @@
-import Image from "next/image";
+"use client";
+
+import Navbar from "./components/navbar";
+import { useRef, useState, useEffect } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const about = useRef<HTMLElement | null>(null);
+  const projects = useRef<HTMLElement | null>(null);
+  const resume = useRef<HTMLElement | null>(null);
+  const contact = useRef<HTMLElement | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  const [selectedSection, setSelectedSection] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 120, // change this to your desired scroll Y offset
+      behavior: "smooth", // or "auto"
+    });
+  }, []);
+
+  return (
+    <div className="scroll-smooth">
+      <Navbar
+        about={about}
+        projects={projects}
+        resume={resume}
+        contact={contact}
+      />
+      <div className="pt-10">
+        <section id="about" ref={about} className="scroll-mt-10 pl-20 pr-20">
+          <div className="flex space-x-15 h-screen place-items-center">
+            <div className="flex flex-col justify-items-center pl-5 w-6/12 space-y-3">
+              <h2 className="text-5xl animated-slide">Hello World. I'm</h2>
+              <hr className="w-[25%] mt-1"></hr>
+              <div className="animated-slide-delay-1">
+                <h1 className="text-8xl font-bold animated-color">
+                  Angelina Suy
+                </h1>
+              </div>
+              <h3 className="pt-2 animated-slide-delay-2">
+                a new grad software engineer focused on web development
+              </h3>
+            </div>
+            <div className="flex flex-col space-y-3 p-10 ">
+              <p>
+                I'm a new grad with a BS in Computer Science from University
+                Santa Barbara. My primary interest lies in web development, but
+                I am always open to learning and developing new skills in any
+                technology-related field.
+              </p>
+              <p>
+                In the months following my graduation, I focused on learning
+                some practical skills I had not in academia through personal
+                projects. I created a trivia web app that supports both solo
+                play and online multiplayer, a potluck planner that facillitated
+                group collaboration, and a few interactive birthday cards.
+                Through it all, I tried to document the process to categorize
+                and internalize what I learned.
+              </p>
+              <p>
+                I am always open to job opportunities. When I'm not sat in front
+                of a terminal, I like to read fantasy books, draw, and play
+                games.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section
+          className="bg-jet-50 p-20 h-screen"
+          id="projects"
+          ref={projects}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <p className="">
+            {" "}
+            Pellentesque vestibulum elit quis aliquam mattis. Donec suscipit
+            scelerisque blandit. Fusce tempor purus ac ante blandit imperdiet.
+            Donec feugiat erat at vulputate scelerisque. Suspendisse nec nisl
+            mauris. Sed hendrerit tempor erat eget venenatis. Aliquam
+            condimentum non neque quis fermentum. Sed maximus rutrum varius.
+            Proin enim nisi, commodo et sagittis at, sollicitudin non augue.
+            Morbi sed turpis ac justo tristique vulputate eget nec est.
+            Pellentesque vestibulum elit quis aliquam mattis. Donec suscipit
+            scelerisque blandit. Fusce tempor purus ac ante blandit imperdiet.
+            Donec feugiat erat at vulputate scelerisque. Suspendisse nec nisl
+            mauris. Sed hendrerit tempor erat eget venenatis. Aliquam
+            condimentum non neque quis fermentum. Sed maximus rutrum varius.
+            Proin enim nisi, commodo et sagittis at, sollicitudin non augue.
+            Morbi sed turpis ac justo tristique vulputate eget nec est.
+            Pellentesque vestibulum elit quis aliquam mattis. Donec suscipit
+            scelerisque blandit. Fusce tempor purus ac ante blandit imperdiet.
+            Donec feugiat erat at vulputate scelerisque. Suspendisse nec nisl
+            mauris. Sed hendrerit tempor erat eget venenatis. Aliquam
+            condimentum non neque quis fermentum. Sed maximus rutrum varius.
+            Proin enim nisi, commodo et sagittis at, sollicitudin non augue.
+            Morbi sed turpis ac justo tristique vulputate eget nec est.
+            Pellentesque vestibulum elit quis aliquam mattis. Donec suscipit
+            scelerisque blandit. Fusce tempor purus ac ante blandit imperdiet.
+            Donec feugiat erat at vulputate scelerisque. Suspendisse nec nisl
+            mauris. Sed hendrerit tempor erat eget venenatis. Aliquam
+            condimentum non neque quis fermentum. Sed maximus rutrum varius.
+            Proin enim nisi, commodo et sagittis at, sollicitudin non augue.
+            Morbi sed turpis ac justo tristique vulputate eget nec est.
+            Pellentesque vestibulum elit quis aliquam mattis. Donec suscipit
+            scelerisque blandit. Fusce tempor purus ac ante blandit imperdiet.
+            Donec feugiat erat at vulputate scelerisque. Suspendisse nec nisl
+            mauris. Sed hendrerit tempor erat eget venenatis. Aliquam
+            condimentum non neque quis fermentum. Sed maximus rutrum varius.
+            Proin enim nisi, commodo et sagittis at, sollicitudin non augue.
+            Morbi sed turpis ac justo tristique vulputate eget nec est.
+            Pellentesque vestibulum elit quis aliquam mattis. Donec suscipit
+            scelerisque blandit. Fusce tempor purus ac ante blandit imperdiet.
+            Donec feugiat erat at vulputate scelerisque. Suspendisse nec nisl
+            mauris. Sed hendrerit tempor erat eget venenatis. Aliquam
+            condimentum non neque quis fermentum. Sed maximus rutrum varius.
+            Proin enim nisi, commodo et sagittis at, sollicitudin non augue.
+            Morbi sed turpis ac justo tristique vulputate eget nec est.
+          </p>
+        </section>
+        <section id="resume" ref={resume}>
+          {" "}
+          Pellentesque vestibulum elit quis aliquam mattis. Donec suscipit
+          scelerisque blandit. Fusce tempor purus ac ante blandit imperdiet.
+          Donec feugiat erat at vulputate scelerisque. Suspendisse nec nisl
+          mauris. Sed hendrerit tempor erat eget venenatis. Aliquam condimentum
+          non neque quis fermentum. Sed maximus rutrum varius. Proin enim nisi,
+          commodo et sagittis at, sollicitudin non augue. Morbi sed turpis ac
+          justo tristique vulputate eget nec est. Pellentesque vestibulum elit
+          quis aliquam mattis. Donec suscipit scelerisque blandit. Fusce tempor
+          purus ac ante blandit imperdiet. Donec feugiat erat at vulputate
+          scelerisque. Suspendisse nec nisl mauris. Sed hendrerit tempor erat
+          eget venenatis. Aliquam condimentum non neque quis fermentum. Sed
+          maximus rutrum varius. Proin enim nisi, commodo et sagittis at,
+          sollicitudin non augue. Morbi sed turpis ac justo tristique vulputate
+          eget nec est.
+        </section>
+        <section id="contact" ref={contact}>
+          TESTSTSTSTSTSTST{" "}
+        </section>
+      </div>
     </div>
   );
 }
