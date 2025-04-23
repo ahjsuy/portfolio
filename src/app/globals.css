@@ -11,9 +11,12 @@
   --color-night-50: rgb(32, 32, 29);
   --color-jet-50: rgb(29, 32, 32);
   --color-teal-50: rgb(51, 153, 137);
+  --color-beige-50: rgb(248, 244, 227);
+  --color-cream-50: rgb(255, 225, 168);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-roboto: var(--font-rob);
+  --font-roboto: var(--font-roboto);
+  --font-oswald: var(--font-oswald);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -70,4 +73,8 @@ body {
   100% {
     color: #eeaeca;
   }
+}
+
+.box-shadow {
+  box-shadow: -0.5rem 0.5rem 1.5rem var(--color-cream-50);
 }
