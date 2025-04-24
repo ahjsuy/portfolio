@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import Navbar from "./components/navbar";
 import ProjectCard from "./components/projectCard";
+import EmblaCarousel from "./components/emblaCarousel/emblaCarousel";
 
 export default function Home() {
   const about = useRef<HTMLElement | null>(null);
@@ -11,6 +12,25 @@ export default function Home() {
   const contact = useRef<HTMLElement | null>(null);
 
   const [selectedSection, setSelectedSection] = useState(0);
+  const projectsList = [
+    <ProjectCard
+      imgSrc="/zen-trivia.png"
+      title="Zen Trivia"
+      description="A trivia web app powered by the Trivia API. Play a relaxing endless
+singleplayer mode or compete with friends in multiplayer. There are
+a variety of categories and difficulties to meet your fancy."
+    />,
+    <ProjectCard
+      imgSrc="/zen-trivia.png"
+      title="Custom Connections"
+      description="Inspired by the New York Times Connections, you can make your own Connections game with custom categories and send them to your friends."
+    />,
+    <ProjectCard
+      imgSrc="/zen-trivia.png"
+      title="Potluck Planner"
+      description="Coordinate a potluck easily with this online planner. A collaborative interface and automated email notifications make event planning even easier."
+    />,
+  ];
 
   useEffect(() => {
     window.scrollTo({
@@ -69,31 +89,25 @@ export default function Home() {
           </div>
         </section>
         <section
-          className="flex justify-center place-items-center bg-jet-50 p-20 h-screen"
+          className="flex-col justify-center place-items-center bg-jet-50 p-20 h-screen"
           id="projects"
           ref={projects}
         >
-          <ProjectCard />
+          <h1 className="font-oswald text-5xl mb-15">PROJECTS</h1>
+          <div className="flex flex-row space-x-15">
+            {projectsList[0]}
+            {projectsList[1]}
+            {projectsList[2]}
+          </div>
+          {/* <EmblaCarousel /> */}
         </section>
         <section id="resume" ref={resume}>
-          {" "}
-          Pellentesque vestibulum elit quis aliquam mattis. Donec suscipit
-          scelerisque blandit. Fusce tempor purus ac ante blandit imperdiet.
-          Donec feugiat erat at vulputate scelerisque. Suspendisse nec nisl
-          mauris. Sed hendrerit tempor erat eget venenatis. Aliquam condimentum
-          non neque quis fermentum. Sed maximus rutrum varius. Proin enim nisi,
-          commodo et sagittis at, sollicitudin non augue. Morbi sed turpis ac
-          justo tristique vulputate eget nec est. Pellentesque vestibulum elit
-          quis aliquam mattis. Donec suscipit scelerisque blandit. Fusce tempor
-          purus ac ante blandit imperdiet. Donec feugiat erat at vulputate
-          scelerisque. Suspendisse nec nisl mauris. Sed hendrerit tempor erat
-          eget venenatis. Aliquam condimentum non neque quis fermentum. Sed
-          maximus rutrum varius. Proin enim nisi, commodo et sagittis at,
-          sollicitudin non augue. Morbi sed turpis ac justo tristique vulputate
-          eget nec est.
+          <div className="h-screen">
+            <h1>Education</h1>
+          </div>
         </section>
         <section id="contact" ref={contact}>
-          TESTSTSTSTSTSTST{" "}
+          <div className="h-screen bg-jet-50"></div>
         </section>
       </div>
     </div>
