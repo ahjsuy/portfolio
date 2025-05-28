@@ -27,7 +27,7 @@ export default function Home() {
   const projectsList = [
     <ProjectCard
       key={0}
-      imgSrc={`${basePath}zen-trivia-game-screen.png`}
+      imgSrc={`${basePath}/zen-trivia-game-screen.png`}
       title="Zen Trivia"
       description="A trivia web app powered by the Trivia API. Play a relaxing endless
                     singleplayer mode or compete with friends in multiplayer. There are
@@ -39,7 +39,7 @@ export default function Home() {
     />,
     <ProjectCard
       key={1}
-      imgSrc={`${basePath}custom-connections.png`}
+      imgSrc={`${basePath}/custom-connections.png`}
       title="Custom Connections"
       description="Inspired by the New York Times Connections, you can make your own Connections game with custom categories and send them to your friends."
       visitLink="https://custom-connections.vercel.app/"
@@ -275,7 +275,7 @@ export default function Home() {
                 className="m-5 "
                 height={svgSize}
                 width={svgSize}
-                src={`${basePath}/ucsb.svg`}
+                src={`${basePath}/UCSB.svg`}
                 alt=""
               />
               <ul className="text-left">
