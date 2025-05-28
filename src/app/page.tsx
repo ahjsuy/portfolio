@@ -22,12 +22,12 @@ export default function Home() {
   const potluckPlannerRef = useRef<HTMLDivElement | null>(null);
   const happyCowsRef = useRef<HTMLDivElement | null>(null);
 
-  // projects checker
+  const basePath = process.env.NODE_ENV === "production" ? "/portfolio" : "";
 
   const projectsList = [
     <ProjectCard
       key={0}
-      imgSrc="/zen-trivia-game-screen.png"
+      imgSrc={`${basePath}zen-trivia-game-screen.png`}
       title="Zen Trivia"
       description="A trivia web app powered by the Trivia API. Play a relaxing endless
                     singleplayer mode or compete with friends in multiplayer. There are
@@ -39,7 +39,7 @@ export default function Home() {
     />,
     <ProjectCard
       key={1}
-      imgSrc="/custom-connections.png"
+      imgSrc={`${basePath}custom-connections.png`}
       title="Custom Connections"
       description="Inspired by the New York Times Connections, you can make your own Connections game with custom categories and send them to your friends."
       visitLink="https://custom-connections.vercel.app/"
@@ -50,7 +50,7 @@ export default function Home() {
 
     <ProjectCard
       key={2}
-      imgSrc="/happy-cows.png"
+      imgSrc={`${basePath}/happy-cows.png`}
       title="Happy Cows"
       description="Understand the Tragedy of Commons through metaphorical, immersive gameplay with others. Iteratively developed at UCSB with each CS156 course offering."
       visitLink="https://happycows.dokku-00.cs.ucsb.edu/"
@@ -60,7 +60,7 @@ export default function Home() {
     />,
     <ProjectCard
       key={3}
-      imgSrc="/potluck-planner.png"
+      imgSrc={`${basePath}/potluck-planner.png`}
       title="Potluck Planner [In Progress]"
       description="Coordinate a potluck easily with this online planner. A collaborative interface and automated email notifications make event planning even easier."
       tools={["React", "TypeScript", "PostgresSQL", "Sequelize", "Express"]}
@@ -132,15 +132,19 @@ export default function Home() {
               <div className="text-white flex flex-row pl-0 ml-0 gap-5">
                 {[
                   [
-                    "./linkedin.svg",
+                    "/linkedin.svg",
                     "https://www.linkedin.com/in/angelina-suy-9018291b2",
                   ],
-                  ["./github.svg", "https://github.com/ahjsuy"],
-                  ["./gmail.svg", "mailto:angelinasuy3@gmail.com"],
+                  ["/github.svg", "https://github.com/ahjsuy"],
+                  ["/gmail.svg", "mailto:angelinasuy3@gmail.com"],
                 ].map((item, index) => (
                   <div className="h-[2.5rem] w-[2.5rem]" key={index}>
                     <a href={item[1]} target="_blank">
-                      <img className="blue-gray-icon" src={item[0]} alt="" />
+                      <img
+                        className="blue-gray-icon"
+                        src={`${basePath}/${item[0]}`}
+                        alt=""
+                      />
                     </a>
                   </div>
                 ))}
@@ -151,7 +155,7 @@ export default function Home() {
                 I<span>&apos;</span>m a new grad with a BS in Computer Science
                 from the University of California Santa Barbara. My primary
                 interest lies in web development, but I am always open and eager
-                to pick up new experiences in any adjacent field.
+                to pick up new experiences in adjacent fields.
               </p>
               <p>
                 In the months following my graduation, I have been focusing on
@@ -211,7 +215,12 @@ export default function Home() {
             <h2>Languages</h2>
             <div className="h-[20%] w-full flex flex-row place-content-center">
               <div className="m-5 pt-4 hvr-float-shadow">
-                <img height={svgSize} width={svgSize} src={"/c.svg"} alt="" />
+                <img
+                  height={svgSize}
+                  width={svgSize}
+                  src={`${basePath}/c.svg`}
+                  alt=""
+                />
               </div>
               {skills_languages.map((item, index) => (
                 <div key={index} className="m-5 pt-4 hvr-float-shadow">
@@ -247,7 +256,7 @@ export default function Home() {
                 <img
                   height={svgSize}
                   width={svgSize}
-                  src="/stryker.svg"
+                  src={`${basePath}/stryker.svg`}
                   alt=""
                 />
               </div>
@@ -255,7 +264,7 @@ export default function Home() {
                 <img
                   height={svgSize}
                   width={svgSize}
-                  src="/pitest.svg"
+                  src={`${basePath}/pitest.svg`}
                   alt=""
                 />
               </div>
@@ -266,7 +275,7 @@ export default function Home() {
                 className="m-5 "
                 height={svgSize}
                 width={svgSize}
-                src="/ucsb.svg"
+                src={`${basePath}/ucsb.svg`}
                 alt=""
               />
               <ul className="text-left">
@@ -378,7 +387,7 @@ export default function Home() {
                     className="white-icon ml-2"
                     width={"24rem"}
                     height={"24rem"}
-                    src="./mail.svg"
+                    src={`${basePath}/mail.svg`}
                   />
                 </button>
                 {state.succeeded && <div>I will get back to you soon!</div>}
