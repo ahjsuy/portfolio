@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { checkInViewport } from "../functions/checkInViewport";
 
 interface Props {
   imgSrc: string;
@@ -7,6 +8,8 @@ interface Props {
   description: string;
   githubLink?: string;
   detailsLink?: string;
+  tools?: string[];
+  ref: React.RefObject<HTMLDivElement | null>;
 }
 
 const ProjectCard = ({
@@ -16,41 +19,72 @@ const ProjectCard = ({
   description,
   githubLink,
   detailsLink,
+  tools,
+  ref,
 }: Props) => {
+  const elementInViewport = checkInViewport(ref, 0.2);
   return (
-    <div className="w-[30%] h-[65vh]">
-      <div className="bg-beige-50 rounded-3xl h-full p-5 shadow-md box-shadow text-black">
-        <div className="w-full h-90 relative">
-          <Image
-            className="rounded-3xl"
-            alt="Zen Trivia"
-            src={imgSrc}
-            fill={true}
-            priority
-          />
+    <div
+      className={
+        elementInViewport
+          ? "project-card flex flex-row bg-[#0d1b2a] text-white rounded-lg p-3 m-5 mb-10 shadow-md text-black place-items-center max-w-[60%] scale scale-up "
+          : "project-card flex flex-row bg-[#0d1b2a] text-white rounded-lg p-3 m-5 mb-10 shadow-md text-black place-items-center max-w-[60%] scale scale-down"
+      }
+      ref={ref}
+    >
+      <div className="w-[30rem] h-[15rem] relative">
+        <Image
+          className=""
+          alt=""
+          src={imgSrc}
+          quality={100}
+          fill
+          priority
+          style={{ borderRadius: "1.5rem" }}
+        />
+      </div>
+
+      <div className="m-3 p-1 pb-0 flex flex-col justify-between w-[75%] h-[15rem] ">
+        <h1 className="text-4xl font-oswald ml-5">{title}</h1>
+        <p className="ml-5 mt-3 mb-5">{description}</p>
+        <div className="flex flex-row gap-[.5rem] text-sm ml-5">
+          {tools?.map((item) => (
+            <div className="bg-[#778DA9] display-inline place-content-center pl-2 pr-2 rounded-3xl h-[100%]">
+              {" "}
+              {item}{" "}
+            </div>
+          ))}
         </div>
-        <div className="m-3">
-          <h1 className="text-4xl font-oswald ml-5">{title}</h1>
-          <p className="ml-5 mt-3 mb-0">{description}</p>
+        <div className="flex flex-row m-3 mb-0 mt-auto">
           <div className="flex w-full justify-end">
-            <button
-              type="button"
-              className="bg-[#94bbe9] rounded-md pl-2 pr-2 pt-1 pb-1 m-1 text-white"
-            >
-              Visit
-            </button>
-            <button
-              type="button"
-              className="bg-[#c1b4d9] rounded-md pl-2 pr-2 pt-1 pb-1 m-1 text-white"
-            >
-              GitHub
-            </button>
-            <button
-              type="button"
-              className="bg-[#eeaeca] rounded-md pl-2 pr-2 pt-1 pb-1 m-1 text-white"
-            >
-              Details
-            </button>
+            {visitLink && (
+              <button
+                type="button"
+                className="bg-[#415A77] rounded-md pl-2 pr-2 pt-1 pb-1 m-1 text-white"
+              >
+                <a href={visitLink} target="_blank">
+                  Visit
+                </a>
+              </button>
+            )}
+            {githubLink && (
+              <button
+                type="button"
+                className="bg-[#415A77] rounded-md pl-2 pr-2 pt-1 pb-1 m-1 text-white"
+              >
+                <a href={githubLink} target="_blank">
+                  GitHub
+                </a>
+              </button>
+            )}
+            {detailsLink && (
+              <button
+                type="button"
+                className="bg-[#415A77] rounded-md pl-2 pr-2 pt-1 pb-1 m-1 text-white"
+              >
+                Details
+              </button>
+            )}
           </div>
         </div>
       </div>

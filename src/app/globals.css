@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #131515;
+  --background: #0d1b2a;
   --foreground: #ffffff;
 }
 
@@ -94,6 +94,184 @@ body {
   }
 }
 
+.animated-grow-from-middle {
+  animation: grow-from-middle 1s ease forwards;
+  transform-origin: center;
+}
+
+@keyframes grow-from-middle {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
 .box-shadow {
-  box-shadow: -0.5rem 0.5rem 1.5rem var(--color-cream-50);
+  animation: box-shadow-glow 10s infinite;
+}
+
+@keyframes box-shadow-glow {
+  0% {
+    box-shadow: -0rem 0rem 1.5rem 1rem #eeaeca;
+  }
+  50% {
+    box-shadow: -0rem 0rem 1.5rem 1rem #94bbe9;
+  }
+  100% {
+    box-shadow: -0rem 0rem 1.5rem 1rem #eeaeca;
+  }
+}
+
+.text-shadow {
+  text-shadow: -0.125rem 0.25rem 0.125rem white;
+}
+
+.project-card {
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  border: 0.1rem;
+  border-style: solid;
+  border-color: gray;
+  /* animation: box-shadow-glow 10s infinite; */
+}
+
+.nav-bar-element:hover {
+  cursor: pointer;
+}
+
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-family: var(--font-oswald);
+}
+
+.scale {
+  transition: transform 0.5s ease;
+  scroll-snap-align: center;
+}
+
+.scale-up {
+  transform: scale(1);
+}
+
+.scale-down {
+  transform: scale(0.75);
+}
+
+.blue-gray-icon {
+  /* filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(352deg)
+    brightness(104%) contrast(107%); */
+  /* filter: invert(11%) sepia(9%) saturate(3330%) hue-rotate(181deg)
+    brightness(95%) contrast(90%); */
+  filter: invert(35%) sepia(16%) saturate(1111%) hue-rotate(172deg)
+    brightness(91%) contrast(91%);
+  transition: transform 0.5 ease;
+}
+
+.blue-gray-icon:hover {
+  filter: invert(90%) sepia(71%) saturate(13%) hue-rotate(12deg) brightness(94%)
+    contrast(88%);
+  transform: scale(1.15);
+}
+
+.white-icon {
+  filter: invert(100%) sepia(0%) saturate(7499%) hue-rotate(92deg)
+    brightness(100%) contrast(100%);
+}
+
+/* Float Shadow */
+.hvr-float-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-float-shadow:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: "";
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(
+    center,
+    ellipse,
+    #eeaeca,
+    rgba(0, 0, 0, 0) 80%
+  );
+  background: radial-gradient(ellipse at center, #94bbe9, rgba(0, 0, 0, 0) 80%);
+  /* W3C */
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.hvr-float-shadow:hover,
+.hvr-float-shadow:focus,
+.hvr-float-shadow:active {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  /* move the element up by 5px */
+}
+.hvr-float-shadow:hover:before,
+.hvr-float-shadow:focus:before,
+.hvr-float-shadow:active:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+/* Underline From Left */
+.hvr-underline-from-left {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+.hvr-underline-from-left:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background: #2098d1;
+  height: 4px;
+  -webkit-transition-property: right;
+  transition-property: right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-underline-from-left:hover:before,
+.hvr-underline-from-left:focus:before,
+.hvr-underline-from-left:active:before {
+  right: 0;
 }
