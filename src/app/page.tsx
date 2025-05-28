@@ -52,7 +52,7 @@ export default function Home() {
       key={2}
       imgSrc="/happy-cows.png"
       title="Happy Cows"
-      description="Understand the tragedy of commons through metaphorical, immersive gameplay with others. Developed at UCSB."
+      description="Understand the Tragedy of Commons through metaphorical, immersive gameplay with others. Iteratively developed at UCSB with each CS156 course offering."
       visitLink="https://happycows.dokku-00.cs.ucsb.edu/"
       githubLink="https://github.com/ucsb-cs156/proj-happycows"
       tools={["React", "SpringBoot", "Storybook", "Docker"]}
@@ -151,7 +151,7 @@ export default function Home() {
                 I<span>&apos;</span>m a new grad with a BS in Computer Science
                 from the University of California Santa Barbara. My primary
                 interest lies in web development, but I am always open and eager
-                to pick up and develop new experiences in any adjacent field.
+                to pick up new experiences in any adjacent field.
               </p>
               <p>
                 In the months following my graduation, I have been focusing on
