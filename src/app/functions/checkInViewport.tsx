@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect, RefObject } from "react";
+import { useState, useEffect, RefObject } from "react";
 
-export function checkInViewport(
+export function useCheckInViewport(
   ref: RefObject<HTMLElement | null>,
   threshold: number = 0.5
 ) {
@@ -19,7 +19,7 @@ export function checkInViewport(
     return () => {
       observer.disconnect();
     };
-  }, [ref]);
+  }, [ref, threshold]);
 
   return inViewport;
 }

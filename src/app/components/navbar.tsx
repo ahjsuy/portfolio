@@ -1,6 +1,6 @@
 "use client";
 
-import { checkInViewport } from "../functions/checkInViewport";
+import { useCheckInViewport } from "../functions/checkInViewport";
 
 interface Props {
   about: React.RefObject<HTMLElement | null>;
@@ -11,10 +11,10 @@ interface Props {
 const Navbar = ({ about, projects, resume, contact }: Props) => {
   const threshold = 0.1;
   const elementInViewport: boolean[] = [
-    checkInViewport(about, threshold),
-    checkInViewport(projects, threshold),
-    checkInViewport(resume, threshold),
-    checkInViewport(contact, threshold),
+    useCheckInViewport(about, threshold),
+    useCheckInViewport(projects, threshold),
+    useCheckInViewport(resume, threshold),
+    useCheckInViewport(contact, threshold),
   ];
   const navbarElements: string[] = [
     "01. About",
@@ -43,7 +43,7 @@ const Navbar = ({ about, projects, resume, contact }: Props) => {
       </h1>
       <div className="space-x-5 justify-end flex flex-row">
         {navbarElements.map((e, index) => (
-          <div className="">
+          <div className="" key={index}>
             <a
               className="nav-bar-element"
               key={index}
@@ -58,10 +58,6 @@ const Navbar = ({ about, projects, resume, contact }: Props) => {
             )}
           </div>
         ))}
-        {/* <a onClick={() => handleClick(about)}>{number0}1. About</a>
-        <a onClick={() => handleClick(projects)}>{number0}2. Projects</a>
-        <a onClick={() => handleClick(resume)}>{number0}3. Resume</a>
-        <a onClick={() => handleClick(contact)}>{number0}4. Contact</a> */}
       </div>
     </div>
   );

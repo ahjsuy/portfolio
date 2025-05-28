@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { checkInViewport } from "../functions/checkInViewport";
+import { useCheckInViewport } from "../functions/checkInViewport";
 
 interface Props {
   imgSrc: string;
@@ -22,13 +22,13 @@ const ProjectCard = ({
   tools,
   ref,
 }: Props) => {
-  const elementInViewport = checkInViewport(ref, 0.2);
+  const elementInViewport = useCheckInViewport(ref, 0.2);
   return (
     <div
       className={
         elementInViewport
-          ? "project-card flex flex-row bg-[#0d1b2a] text-white rounded-lg p-3 m-5 mb-10 shadow-md text-black place-items-center max-w-[60%] scale scale-up "
-          : "project-card flex flex-row bg-[#0d1b2a] text-white rounded-lg p-3 m-5 mb-10 shadow-md text-black place-items-center max-w-[60%] scale scale-down"
+          ? "project-card flex flex-row bg-[#0d1b2a] p-3 text-white rounded-lg shadow-md text-black place-items-center scale scale-up "
+          : "project-card flex flex-row bg-[#0d1b2a] p-3 text-white rounded-lg shadow-md text-black place-items-center scale scale-down"
       }
       ref={ref}
     >
@@ -48,8 +48,11 @@ const ProjectCard = ({
         <h1 className="text-4xl font-oswald ml-5">{title}</h1>
         <p className="ml-5 mt-3 mb-5">{description}</p>
         <div className="flex flex-row gap-[.5rem] text-sm ml-5">
-          {tools?.map((item) => (
-            <div className="bg-[#778DA9] display-inline place-content-center pl-2 pr-2 rounded-3xl h-[100%]">
+          {tools?.map((item, index) => (
+            <div
+              className="bg-[#778DA9] display-inline place-content-center pl-2 pr-2 rounded-3xl h-[100%]"
+              key={index}
+            >
               {" "}
               {item}{" "}
             </div>

@@ -1,25 +1,21 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import Navbar from "./components/navbar";
 import ProjectCard from "./components/projectCard";
-import EmblaCarousel from "./components/emblaCarousel/emblaCarousel";
-import { checkInViewport } from "./functions/checkInViewport";
+import { useCheckInViewport } from "./functions/checkInViewport";
 import { useForm, ValidationError } from "@formspree/react";
 
 export default function Home() {
-  const [state, handleSubmit, reset] = useForm("xqaqvyvb");
+  const [state, handleSubmit] = useForm("xqaqvyvb");
   const about = useRef<HTMLElement | null>(null);
   const projects = useRef<HTMLElement | null>(null);
   const resume = useRef<HTMLElement | null>(null);
   const contact = useRef<HTMLElement | null>(null);
-  // const [projectsInViewport, setProjectsInViewport] = useState(false);
-  // const [selectedSection, setSelectedSection] = useState(0);
 
-  const aboutInViewport = checkInViewport(about);
-  const projectsInViewport = checkInViewport(projects);
-  const resumeInViewport = checkInViewport(resume);
-  const contactInViewport = checkInViewport(contact);
+  const projectsInViewport = useCheckInViewport(projects);
+  const resumeInViewport = useCheckInViewport(resume);
+  const contactInViewport = useCheckInViewport(contact);
 
   const zenTriviaRef = useRef<HTMLDivElement | null>(null);
   const customConnectionsRef = useRef<HTMLDivElement | null>(null);
@@ -30,6 +26,7 @@ export default function Home() {
 
   const projectsList = [
     <ProjectCard
+      key={0}
       imgSrc="/zen-trivia-game-screen.png"
       title="Zen Trivia"
       description="A trivia web app powered by the Trivia API. Play a relaxing endless
@@ -41,6 +38,7 @@ export default function Home() {
       ref={zenTriviaRef}
     />,
     <ProjectCard
+      key={1}
       imgSrc="/custom-connections.png"
       title="Custom Connections"
       description="Inspired by the New York Times Connections, you can make your own Connections game with custom categories and send them to your friends."
@@ -51,6 +49,7 @@ export default function Home() {
     />,
 
     <ProjectCard
+      key={2}
       imgSrc="/happy-cows.png"
       title="Happy Cows"
       description="Understand the tragedy of commons through metaphorical, immersive gameplay with others. Developed at UCSB."
@@ -60,6 +59,7 @@ export default function Home() {
       ref={happyCowsRef}
     />,
     <ProjectCard
+      key={3}
       imgSrc="/potluck-planner.png"
       title="Potluck Planner [In Progress]"
       description="Coordinate a potluck easily with this online planner. A collaborative interface and automated email notifications make event planning even easier."
@@ -118,7 +118,7 @@ export default function Home() {
           <div className="flex space-x-15 h-screen place-items-center">
             <div className="flex flex-col justify-items-center pl-5 w-6/12 space-y-3">
               <h2 className="text-5xl animated-slide font-oswald">
-                Hello World. I'm
+                Hello World. I<span>&apos;</span>m
               </h2>
               <hr className="w-[25%] mt-1"></hr>
               <div className="animated-slide-delay-1">
@@ -137,10 +137,10 @@ export default function Home() {
                   ],
                   ["./github.svg", "https://github.com/ahjsuy"],
                   ["./gmail.svg", "mailto:angelinasuy3@gmail.com"],
-                ].map((item) => (
-                  <div className="h-[2.5rem] w-[2.5rem]">
+                ].map((item, index) => (
+                  <div className="h-[2.5rem] w-[2.5rem]" key={index}>
                     <a href={item[1]} target="_blank">
-                      <img className="blue-gray-icon" src={item[0]} />
+                      <img className="blue-gray-icon" src={item[0]} alt="" />
                     </a>
                   </div>
                 ))}
@@ -148,20 +148,21 @@ export default function Home() {
             </div>
             <div className="flex flex-col space-y-3 p-10">
               <p>
-                I'm a new grad with a BS in Computer Science from the University
-                of California Santa Barbara. My primary interest lies in web
-                development, but I am always open and eager to pick up and
-                develop new experiences in any adjacent field.
+                I<span>&apos;</span>m a new grad with a BS in Computer Science
+                from the University of California Santa Barbara. My primary
+                interest lies in web development, but I am always open and eager
+                to pick up and develop new experiences in any adjacent field.
               </p>
               <p>
                 In the months following my graduation, I have been focusing on
                 learning some practical skills I had not in academia through
                 personal projects. I have created a trivia web app that supports
                 both solo play and online multiplayer, a web app where users can
-                create their own versions of the New York Time's Connections,
-                and a few interactive birthday cards. Currently, I'm working on
-                a potluck planning web app. More information can be found
-                further in this website.
+                create their own versions of the New York Time
+                <span>&apos;</span>s Connections, and a few interactive birthday
+                cards. Currently, I<span>&apos;</span>m working on a potluck
+                planning web app. More information can be found further in this
+                website.
               </p>
               <p>
                 I am always open to job opportunities. In my free time, I love
@@ -186,9 +187,12 @@ export default function Home() {
             }
           ></hr>
           <div className="flex flex-col place-items-center">
-            {projectsList.map((item) => item)}
+            {projectsList.map((item, index) => (
+              <div className="m-5 mb-10 max-w-[60%]" key={index}>
+                {item}
+              </div>
+            ))}
           </div>
-          {/* <EmblaCarousel /> */}
         </section>
         <section
           className="flex-col justify-center place-content-center p-20 pb-5 border-t border-gray-700"
@@ -207,11 +211,11 @@ export default function Home() {
             <h2>Languages</h2>
             <div className="h-[20%] w-full flex flex-row place-content-center">
               <div className="m-5 pt-4 hvr-float-shadow">
-                <img height={svgSize} width={svgSize} src={"/c.svg"} />
+                <img height={svgSize} width={svgSize} src={"/c.svg"} alt="" />
               </div>
               {skills_languages.map((item, index) => (
                 <div key={index} className="m-5 pt-4 hvr-float-shadow">
-                  <img height={svgSize} width={svgSize} src={item} />
+                  <img height={svgSize} width={svgSize} src={item} alt="" />
                 </div>
               ))}
             </div>
@@ -223,11 +227,11 @@ export default function Home() {
                     key={index}
                     className="m-5 pt-4 hvr-float-shadow white-icon"
                   >
-                    <img height={svgSize} width={svgSize} src={item} />
+                    <img height={svgSize} width={svgSize} src={item} alt="" />
                   </div>
                 ) : (
                   <div key={index} className="m-5 pt-4 hvr-float-shadow">
-                    <img height={svgSize} width={svgSize} src={item} />
+                    <img height={svgSize} width={svgSize} src={item} alt="" />
                   </div>
                 )
               )}
@@ -236,14 +240,24 @@ export default function Home() {
             <div className="h-[20%] w-full flex flex-row place-content-center">
               {skills_technologies.map((item, index) => (
                 <div key={index} className="m-5 pt-4 hvr-float-shadow">
-                  <img height={svgSize} width={svgSize} src={item} />
+                  <img height={svgSize} width={svgSize} src={item} alt="" />
                 </div>
               ))}
               <div className="m-5 pt-4 hvr-float-shadow">
-                <img height={svgSize} width={svgSize} src="/stryker.svg" />
+                <img
+                  height={svgSize}
+                  width={svgSize}
+                  src="/stryker.svg"
+                  alt=""
+                />
               </div>
               <div className="m-5 pt-4 hvr-float-shadow">
-                <img height={svgSize} width={svgSize} src="/pitest.svg" />
+                <img
+                  height={svgSize}
+                  width={svgSize}
+                  src="/pitest.svg"
+                  alt=""
+                />
               </div>
             </div>
             <h2>Education</h2>
@@ -253,12 +267,15 @@ export default function Home() {
                 height={svgSize}
                 width={svgSize}
                 src="/ucsb.svg"
+                alt=""
               />
               <ul className="text-left">
                 <li key={1}>B.S. Computer Science</li>
                 <li key={2}>September 2021-September 2024</li>
                 <li key={3}>3.59/4.00 GPA</li>
-                <li key={4}>Dean's Honors F21, W23, F23, W24</li>
+                <li key={4}>
+                  Dean<span>&apos;</span>s Honors F21, W23, F23, W24
+                </li>
                 <li key={5}>Member of CoderSB and Women in Computer Science</li>
               </ul>
             </div>
@@ -383,10 +400,10 @@ export default function Home() {
                 ],
                 ["./github.svg", "https://github.com/ahjsuy"],
                 ["./gmail.svg", "mailto:angelinasuy3@gmail.com"],
-              ].map((item) => (
-                <div className="h-[2.5rem] w-[2.5rem]">
+              ].map((item, index) => (
+                <div className="h-[2.5rem] w-[2.5rem]" key={index}>
                   <a href={item[1]} target="_blank">
-                    <img className="blue-gray-icon" src={item[0]} />
+                    <img className="blue-gray-icon" src={item[0]} alt="" />
                   </a>
                 </div>
               ))}
