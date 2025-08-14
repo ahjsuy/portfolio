@@ -31,7 +31,10 @@ export default function Home() {
       title="Zen Trivia"
       description="A trivia web app powered by the Trivia API. Play a relaxing endless
                     singleplayer mode or compete with friends in multiplayer. There are
-                    a variety of categories and difficulties to meet your fancy."
+                    a variety of categories and difficulties to meet your fancy. Please 
+                    note that the server I run multiplayer on goes to sleep, so if it 
+                    doesn't work immediately after you try to play, wait a few seconds 
+                    and refresh!"
       visitLink="https://trivia-game-zen.vercel.app/"
       githubLink="https://github.com/ahjsuy/Zen-Trivia"
       tools={["React", "Typescript", "Express", "Websockets"]}
