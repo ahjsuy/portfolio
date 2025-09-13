@@ -116,7 +116,6 @@ export default function Home() {
         projects={projects}
         resume={resume}
         contact={contact}
-        isMobile={isMobile}
       />
       <div className="sm:pt-10 pt-25">
         <section

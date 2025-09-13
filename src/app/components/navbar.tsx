@@ -7,9 +7,8 @@ interface Props {
   projects: React.RefObject<HTMLElement | null>;
   resume: React.RefObject<HTMLElement | null>;
   contact: React.RefObject<HTMLElement | null>;
-  isMobile: boolean;
 }
-const Navbar = ({ about, projects, resume, contact, isMobile }: Props) => {
+const Navbar = ({ about, projects, resume, contact }: Props) => {
   const threshold = 0.1;
   const elementInViewport: boolean[] = [
     useCheckInViewport(about, threshold),
