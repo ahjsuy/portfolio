@@ -5,6 +5,7 @@ import Navbar from "./components/navbar";
 import ProjectCard from "./components/projectCard";
 import { useCheckInViewport } from "./functions/checkInViewport";
 import { useForm, ValidationError } from "@formspree/react";
+import { useMediaQuery } from "react-responsive";
 
 export default function Home() {
   const [state, handleSubmit] = useForm("xqaqvyvb");
@@ -23,6 +24,8 @@ export default function Home() {
   const happyCowsRef = useRef<HTMLDivElement | null>(null);
 
   const basePath = process.env.NODE_ENV === "production" ? "/portfolio" : "";
+
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const projectsList = [
     <ProjectCard
@@ -95,13 +98,15 @@ export default function Home() {
     "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/storybook/storybook-original-wordmark.svg",
   ];
 
-  const svgSize = "72rem";
+  const svgSize = isMobile ? "50rem" : "72rem";
 
   useEffect(() => {
-    window.scrollTo({
-      top: 120,
-      behavior: "smooth",
-    });
+    if (!isMobile) {
+      window.scrollTo({
+        top: 120,
+        behavior: "smooth",
+      });
+    }
   }, []);
 
   return (
@@ -111,15 +116,16 @@ export default function Home() {
         projects={projects}
         resume={resume}
         contact={contact}
+        isMobile={isMobile}
       />
-      <div className="pt-10">
+      <div className="sm:pt-10 pt-25">
         <section
           id="about"
           ref={about}
-          className="scroll-mt-10 pl-20 pr-20 relative"
+          className="scroll-mt-10 p-0 sm:pl-20 sm:pr-20 relative"
         >
-          <div className="flex space-x-15 h-screen place-items-center">
-            <div className="flex flex-col justify-items-center pl-5 w-6/12 space-y-3">
+          <div className="flex flex-col sm:flex-row space-x-15 sm:h-screen place-items-center">
+            <div className="flex flex-col justify-items-center sm:pl-5 w-6/12 space-y-3">
               <h2 className="text-5xl animated-slide font-oswald">
                 Hello World. I<span>&apos;</span>m
               </h2>
@@ -158,14 +164,16 @@ export default function Home() {
                 I<span>&apos;</span>m a new grad with a BS in Computer Science
                 from the University of California Santa Barbara. My primary
                 interest lies in web development, but I am always open and eager
-                to pick up new experiences in adjacent fields.
+                to pick up new experiences in adjacent fields. Currently, I do
+                some freelance work with DataAnnotation to provide feedback on
+                LLMs, including those specialized in programming.
               </p>
               <p>
                 In the months following my graduation, I have been focusing on
-                learning some practical skills I had not in academia through
-                personal projects. I have created a trivia web app that supports
-                both solo play and online multiplayer, a web app where users can
-                create their own versions of the New York Time
+                learning some practical web dev skills. I have created a trivia
+                web app that supports both solo play and online multiplayer, a
+                web app where users can create their own versions of the New
+                York Time
                 <span>&apos;</span>s Connections, and a few interactive birthday
                 cards. Currently, I<span>&apos;</span>m working on a potluck
                 planning web app. More information can be found further in this
@@ -179,30 +187,33 @@ export default function Home() {
           </div>
         </section>
         <section
-          className="flex-col justify-center place-content-center bg-[#1B263B] text-[#E0E1DD] p-15 pt-0 border-t border-gray-700"
+          className="flex-col justify-center place-content-center bg-[#1B263B] text-[#E0E1DD] sm:p-15 pt-0 border-t border-gray-700"
           id="projects"
           ref={projects}
         >
-          <h1 className="font-oswald text-5xl font-bold ml-20 mt-20">
+          <h1 className="font-oswald text-5xl font-bold ml-10 sm:ml-20 mt-20 sm:mt-10">
             FEATURED PROJECTS
           </h1>
           <hr
             className={
               projectsInViewport
-                ? "ml-20 mt-5 mb-10 w-[15rem] animated-grow-from-middle"
-                : "ml-20 mt-5 mb-10 w-[15rem]"
+                ? "sm:ml-20 ml-10 mt-5 mb-10 w-[15rem] animated-grow-from-middle"
+                : "sm:ml-20 ml-10 mt-5 mb-10 w-[15rem]"
             }
           ></hr>
           <div className="flex flex-col place-items-center">
             {projectsList.map((item, index) => (
-              <div className="m-5 mb-10 max-w-[60%]" key={index}>
+              <div
+                className="m-5 mb-10 max-w-[92%] sm:max-w-[60%] "
+                key={index}
+              >
                 {item}
               </div>
             ))}
           </div>
         </section>
         <section
-          className="flex-col justify-center place-content-center p-20 pb-5 border-t border-gray-700"
+          className="flex-col justify-center place-content-center p-10 sm:p-20 pb-5 border-t border-gray-700"
           id="resume"
           ref={resume}
         >
@@ -217,7 +228,7 @@ export default function Home() {
           <div className="flex flex-col gap-5 text-center">
             <h2>Languages</h2>
             <div className="h-[20%] w-full flex flex-row place-content-center">
-              <div className="m-5 pt-4 hvr-float-shadow">
+              <div className="sm:m-5 sm:pt-4 m-1 hvr-float-shadow">
                 <img
                   height={svgSize}
                   width={svgSize}
@@ -226,7 +237,10 @@ export default function Home() {
                 />
               </div>
               {skills_languages.map((item, index) => (
-                <div key={index} className="m-5 pt-4 hvr-float-shadow">
+                <div
+                  key={index}
+                  className="sm:m-5 sm:pt-4 m-1 hvr-float-shadow"
+                >
                   <img height={svgSize} width={svgSize} src={item} alt="" />
                 </div>
               ))}
@@ -237,12 +251,12 @@ export default function Home() {
                 item.includes("express") ? (
                   <div
                     key={index}
-                    className="m-5 pt-4 hvr-float-shadow white-icon"
+                    className="sm:m-5 sm:pt-4 hvr-float-shadow white-icon"
                   >
                     <img height={svgSize} width={svgSize} src={item} alt="" />
                   </div>
                 ) : (
-                  <div key={index} className="m-5 pt-4 hvr-float-shadow">
+                  <div key={index} className="sm:m-5 sm:pt-4 hvr-float-shadow">
                     <img height={svgSize} width={svgSize} src={item} alt="" />
                   </div>
                 )
@@ -251,11 +265,11 @@ export default function Home() {
             <h2>Developer Tools</h2>
             <div className="h-[20%] w-full flex flex-row place-content-center">
               {skills_technologies.map((item, index) => (
-                <div key={index} className="m-5 pt-4 hvr-float-shadow">
+                <div key={index} className="sm:m-5 sm:pt-4 hvr-float-shadow">
                   <img height={svgSize} width={svgSize} src={item} alt="" />
                 </div>
               ))}
-              <div className="m-5 pt-4 hvr-float-shadow">
+              <div className="sm:m-5 sm:pt-4 hvr-float-shadow">
                 <img
                   height={svgSize}
                   width={svgSize}
@@ -263,7 +277,7 @@ export default function Home() {
                   alt=""
                 />
               </div>
-              <div className="m-5 pt-4 hvr-float-shadow">
+              <div className="sm:m-5 sm:pt-4 hvr-float-shadow">
                 <img
                   height={svgSize}
                   width={svgSize}
@@ -301,19 +315,21 @@ export default function Home() {
           </div>
         </section>
         <section
-          className="bg-[#1B263B] flex flex-col justify-center place-content-center p-20 border-t border-gray-700"
+          className="bg-[#1B263B] flex flex-col justify-center place-content-center sm:p-20 border-t border-gray-700"
           id="contact"
           ref={contact}
         >
-          <h1 className="font-oswald text-5xl font-bold">CONTACT</h1>
+          <h1 className="font-oswald text-5xl font-bold mt-10 ml-10 sm:mt-0">
+            CONTACT
+          </h1>
           <hr
             className={
               contactInViewport
-                ? "mt-5 mb-10 w-[15rem] animated-grow-from-middle"
-                : "mt-5 mb-10 w-[15rem]"
+                ? "ml-10 mt-5 mb-10 w-[15rem] animated-grow-from-middle"
+                : "ml-10 mt-5 mb-10 w-[15rem]"
             }
           ></hr>
-          <div className="bg-[#0d1b2a] place-content-center text-center p-20 pb-15 pt-10 m-auto border border-gray-700 rounded-xl w-[50%]">
+          <div className="bg-[#0d1b2a] place-content-center text-center sm:p-20 p-10 pb-15 pt-10 m-auto border border-gray-700 rounded-xl w-[95%] sm:w-[50%]">
             <form
               onSubmit={handleSubmit}
               action="https://formspree.io/f/xqaqvyvb"

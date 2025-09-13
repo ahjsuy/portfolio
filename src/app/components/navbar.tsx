@@ -7,8 +7,9 @@ interface Props {
   projects: React.RefObject<HTMLElement | null>;
   resume: React.RefObject<HTMLElement | null>;
   contact: React.RefObject<HTMLElement | null>;
+  isMobile: boolean;
 }
-const Navbar = ({ about, projects, resume, contact }: Props) => {
+const Navbar = ({ about, projects, resume, contact, isMobile }: Props) => {
   const threshold = 0.1;
   const elementInViewport: boolean[] = [
     useCheckInViewport(about, threshold),
@@ -37,8 +38,8 @@ const Navbar = ({ about, projects, resume, contact }: Props) => {
   };
 
   return (
-    <div className="flex fixed items-center justify-between bg-[#415A77] h-12 w-screen pr-10 z-50">
-      <h1 className="font-extrabold text-lg justify-start p-[.25rem] pl-2 pr-2 ml-5 animated-color rounded-md">
+    <div className="flex fixed items-center justify-between bg-[#415A77] h-15 sm:h-12 w-screen pr-10 z-50">
+      <h1 className="font-extrabold text-lg justify-start p-[.25rem] pl-2 pr-2 sm:ml-5 m-2 mr-4 animated-color rounded-md">
         A.Suy
       </h1>
       <div className="space-x-5 justify-end flex flex-row">

@@ -27,12 +27,12 @@ const ProjectCard = ({
     <div
       className={
         elementInViewport
-          ? "project-card flex flex-row bg-[#0d1b2a] p-3 text-white rounded-lg shadow-md text-black place-items-center scale scale-up "
-          : "project-card flex flex-row bg-[#0d1b2a] p-3 text-white rounded-lg shadow-md text-black place-items-center scale scale-down"
+          ? "project-card flex flex-col sm:flex-row bg-[#0d1b2a] p-3 text-white rounded-lg shadow-md place-items-center scale scale-up "
+          : "project-card flex flex-col sm:flex-row bg-[#0d1b2a] p-3 text-white rounded-lg shadow-mdplace-items-center scale scale-down"
       }
       ref={ref}
     >
-      <div className="w-[30rem] h-[15rem] relative">
+      <div className="w-[100%] h-[15rem] sm:w-[30rem] sm:h-[15rem] relative">
         <Image
           className=""
           alt=""
@@ -44,13 +44,13 @@ const ProjectCard = ({
         />
       </div>
 
-      <div className="m-3 p-1 pb-0 flex flex-col justify-between w-[75%] h-[15rem] ">
-        <h1 className="text-4xl font-oswald ml-5">{title}</h1>
-        <p className="ml-5 mt-3 mb-5">{description}</p>
-        <div className="flex flex-row gap-[.5rem] text-sm ml-5">
+      <div className="m-3 sm:p-1 pb-0 flex flex-col justify-between w-[75%] ">
+        <h1 className="text-4xl font-oswald sm:ml-5 mt-2 mb-2">{title}</h1>
+        <p className="sm:ml-5 sm:mt-3 sm:mb-5 mb-2">{description}</p>
+        <div className="flex flex-row flex-wrap gap-[.5rem] text-sm sm:ml-5 ">
           {tools?.map((item, index) => (
             <div
-              className="bg-[#778DA9] display-inline place-content-center pl-2 pr-2 rounded-3xl h-[100%]"
+              className="bg-[#778DA9] display-inline place-content-center pl-2 pr-2 rounded-3xl h-[1.25rem]"
               key={index}
             >
               {" "}
@@ -58,7 +58,7 @@ const ProjectCard = ({
             </div>
           ))}
         </div>
-        <div className="flex flex-row m-3 mb-0 mt-auto">
+        <div className="flex flex-row sm:m-3 mb-0 mt-auto">
           <div className="flex w-full justify-end">
             {visitLink && (
               <button
